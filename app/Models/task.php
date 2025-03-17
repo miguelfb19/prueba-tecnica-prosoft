@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -16,11 +17,12 @@ class task extends Model
         parent::boot();
         static::creating(function ($task) {
             $task->id = (string) Str::uuid(); // Generate UUID before saving
+            $task->date = Carbon::now();
         });
     }
     
     protected $fillable = [
-        'name', 'description'
+        'name', 'description', 'status'
     ];
 
 }

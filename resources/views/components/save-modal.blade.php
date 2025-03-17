@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +11,7 @@
                 <form class="flex flex-col w-full justify-center m-4 gap-3" action="{{ url('/') }}" method="post">
                     <!-- Here, i might to add a csrf instruction to get information from the form in the controller -->
                     @csrf
-                    <div id="form-group" class="flex gap-4">
+                    <div id="form-group" class="flex gap-4 max-md:flex-col">
                         <input type="text" name="name" id="name" placeholder="Enter task name" class="custom-input" required>
                         <input type="text" name="description" id="description" placeholder="Enter task description" class="custom-input" required>
                     </div>

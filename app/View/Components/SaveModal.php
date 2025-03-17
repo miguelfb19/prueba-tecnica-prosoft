@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CustomModal extends Component
+class SaveModal extends Component
 {
     // public $isUpdate = false;
     public function __construct()
@@ -16,6 +16,6 @@ class CustomModal extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.custom-modal');
+        return view('components.save-modal');
     }
 }
