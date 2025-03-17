@@ -8,3 +8,4 @@ Route::get('/in-progress', [TaskController::class, 'inProgress']);
 Route::post('/', [TaskController::class, 'store']);
 Route::delete('/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 Route::put('/{id}', [TaskController::class, 'update'])->name('task.update');
+Route::put('/{id}/{status}', [TaskController::class, 'edit'])->name('task.edit');

@@ -32,7 +32,7 @@ body {
 #table-container {
     overflow: auto;
     scrollbar-gutter: stable;
-    min-height: 55%;
+    min-height: 50%;
 }
 
 tr {

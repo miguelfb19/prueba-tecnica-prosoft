@@ -18,17 +18,9 @@ class TaskController extends Controller
 
     public function inProgress()
     {
-        $tasksInProgress = Task::where('status', 'in progress')->get();
+        $tasksInProgress = Task::where('status', 'in-progress')->get();
         logger($tasksInProgress); // Verás esto en `storage/logs/laravel.log`
         return view('in-progress.index', compact('tasksInProgress'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -48,7 +40,20 @@ class TaskController extends Controller
     }
 
 
-    public function edit(string $id, string $status) {}
+    public function edit(string $id, string $status)
+    {
+        // Buscar la tarea por ID
+        $task = Task::where('id', $id)->update([
+            'status' => $status
+        ]);
+
+        if (!$task) {
+            return redirect()->back()->with('error', 'Task not found.');
+        }
+        
+        // Redirigir con mensaje de éxito
+        return redirect()->back();
+    }
 
     /**
      * Update the specified resource in storage.

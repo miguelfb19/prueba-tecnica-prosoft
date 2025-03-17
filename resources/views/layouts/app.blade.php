@@ -11,8 +11,7 @@
 </head>
 
 <body class="h-screen">
-
-    <main class="bg-blue-500 h-full w-full flex p-3 md:p-16">
+    <main class="bg-blue-500 h-full w-full flex p-16 max-md:p-3">
         @yield('content')
     </main>
 </body>

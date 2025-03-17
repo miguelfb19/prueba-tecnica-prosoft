@@ -1,4 +1,4 @@
-<button type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<button type="submit" data-bs-toggle="dropdown" aria-expanded="false" class="navbar-toggler" data-bs-auto-close="outside">
         <div class="flex max-md:flex-col items-center justify-center gap-2 hover:bg-blue-200 p-2 rounded transition-all duration-300">
                 <span>
                         @if ($status === 'completed') Completed

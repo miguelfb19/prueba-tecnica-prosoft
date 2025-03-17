@@ -17,6 +17,11 @@
         });
     }
 </script>
+
+<?php
+$availableStatus = ['completed', 'in-progress', 'canceled', 'not-start']
+?>
+
 <table class="table table-hover pb-20">
     <thead>
         <tr class="table-primary text-center">
@@ -39,34 +44,25 @@
                 <x-status-indicator status="{{$task -> status}}" class="dropdown-toggle" />
                 <div class="dropdown">
                     <ul class="dropdown-menu">
-                        <li class="ml-5">
-                            <form action="">
-                                <button class="dropdown-item">
-                                    <x-status-indicator status="completed" />
+                        @foreach($availableStatus as $status)
+                        <li class="ml-5" class="dropdown-item">
+                            <form action="{{route('task.edit', ['id' => $task->id, 'status' => $status])}}" method="post" id="form-test">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" id="$status">
+                                    <div class="flex items-center gap-2">
+                                        {{ ucwords(str_replace('-', ' ', $status)) }}
+                                        <div class="h-2 w-2 rounded-full
+                                            @if($status === 'completed') bg-success
+                                            @elseif($status === 'in-progress') bg-warning
+                                            @elseif($status === 'canceled') bg-danger
+                                            @else bg-secondary @endif">
+                                        </div>
+                                    </div>
                                 </button>
                             </form>
                         </li>
-                        <li class="ml-5">
-                            <form action="">
-                                <button class="dropdown-item">
-                                    <x-status-indicator status="in-progress" />
-                                </button>
-                            </form>
-                        </li>
-                        <li class="ml-5">
-                            <form action="">
-                                <button class="dropdown-item">
-                                    <x-status-indicator status="canceled" />
-                                </button>
-                            </form>
-                        </li>
-                        <li class="ml-5">
-                            <form action="">
-                                <button class="dropdown-item">
-                                    <x-status-indicator status="" />
-                                </button>
-                            </form>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </td>
@@ -76,7 +72,7 @@
                 </button>
                 <x-update-modal :task="$task" />
 
-                <form action="{{ route('task.destroy', $task->id) }}" method="post" class="h-24 md:h-auto flex place-content-center">
+                <form action="{{ route('task.destroy', $task->id) }}" method="post" class="h-24 lg:h-auto flex place-content-center">
                     @csrf
                     @method('DELETE')
                     <button type="button" onclick="confirmDelete(this)">
@@ -86,7 +82,5 @@
             </td>
         </tr>
         @endforeach
-        <ul class="dropdown-menu">
-        </ul>
     </tbody>
 </table>

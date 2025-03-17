@@ -28,7 +28,7 @@
 @endif
 
 
-<section id="data-show" class="bg-white rounded-lg flex flex-col gap-5 p-3 md:p-10 h-full w-full overflow-auto fade-in">
+<section id="data-show" class="bg-white rounded-lg flex flex-col gap-3 p-10 max-md:p-3 h-full w-full overflow-auto fade-in">
     <!-- Modals -->
     <x-save-modal />
 
