@@ -15,7 +15,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 3. En el navegador busca `http://localhost:8000` para ver la app corriendo.
 
-3. Ejecutar el seed para llenar la DDBB: `php artisan db:seed` y recargar el navegador para ver los cambios.
+4. Ejecutar la migración para la DB: `php artisan migrate:fresh`
+
+5. Ejecutar el seed para llenar la DDBB: `php artisan db:seed` y recargar el navegador para ver los cambios.
 
 # NOTAS DEL DESARROLLO
 
