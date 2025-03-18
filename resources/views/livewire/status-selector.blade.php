@@ -10,7 +10,7 @@
 
             <ul class="dropdown-menu">
                 @foreach($availableStatus as $newStatus)
-                <li class="dropdown-item">
+                <li class="dropdown-item" >
                     <button type="button" wire:click="updateStatus('{{ $newStatus }}')" class="flex gap-2 items-center justify-center">
                         {{ ucfirst($newStatus) }}
                         <div class="h-2 w-2 rounded-full

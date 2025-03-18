@@ -28,7 +28,7 @@
     </script>
 
     <!-- FILTERS -->
-    <div id="form-group" class="flex justify-between items-center gap-3 mb-3">
+    <div id="form-group" class="flex max-md:flex-col justify-center items-center gap-3 mb-3">
         <input type="search" wire:model.live="search" placeholder="Search by name" class="form-control">
 
         <input type="date" wire:model.live="searchDate" class="form-control">
@@ -56,7 +56,7 @@
         </thead>
         <tbody>
             @foreach ($tasks as $task)
-            <tr class="text-center align-middle">
+            <tr class="text-center align-middle" wire:key="task-{{ $task->id }}">
                 <th scope="row" class="hover:underline cursor-pointer" onclick="toggleId(this, '{{ $task->id }}')">
                     {{ Str::limit($task->id, 10, '...') }}
                 </th>
@@ -64,7 +64,7 @@
                 <td>{{ $task->description }}</td>
                 <td>{{ \Carbon\Carbon::parse($task->date)->translatedFormat('d \d\e F, Y') }}</td>
                 <td>
-                    <livewire:status-selector :taskId="$task->id" />
+                    <livewire:status-selector :taskId="$task->id" wire:key="status-{{ $task->id }}"/>
                 </td>
                 <td class="flex justify-center items-center min-h-[4rem]">
                     <button type="submit" data-bs-toggle="modal" data-bs-target="#{{$task->id}}">
