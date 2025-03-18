@@ -40,20 +40,7 @@ class TaskController extends Controller
     }
 
 
-    public function edit(string $id, string $status)
-    {
-        // Buscar la tarea por ID
-        $task = Task::where('id', $id)->update([
-            'status' => $status
-        ]);
-
-        if (!$task) {
-            return redirect()->back()->with('error', 'Task not found.');
-        }
-        
-        // Redirigir con mensaje de éxito
-        return redirect()->back();
-    }
+    public function edit(string $id, string $status) {}
 
     /**
      * Update the specified resource in storage.
