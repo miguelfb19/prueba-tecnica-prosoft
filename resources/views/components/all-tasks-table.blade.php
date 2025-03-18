@@ -16,12 +16,20 @@
             }
         });
     }
+
+    function toggleId(element, fullId) {
+        if (element.innerText.includes("...")) {
+            element.innerText = fullId; // Show complete ID
+        } else {
+            element.innerText = fullId.length > 10 ? fullId.substring(0, 10) + "..." : fullId; // Cut again
+        }
+    }
 </script>
 
-<?php
-$availableStatus = ['completed', 'in-progress', 'canceled', 'not-start']
-?>
-
+<div id="form-group" class="flex justify-between items-center gap-3 mb-3">
+    <input type="search" wire:model.live="search" placeholder="Search by name" class="form-control">
+    <input type="date" wire:model.live="search" placeholder="Search by date" class="form-control">
+</div>
 <table class="table table-hover pb-20">
     <thead>
         <tr class="table-primary text-center">
@@ -36,35 +44,14 @@ $availableStatus = ['completed', 'in-progress', 'canceled', 'not-start']
     <tbody>
         @foreach ($tasks as $task)
         <tr class="text-center align-middle">
-            <th scope="row">{{ $task->id }}</th>
+            <th scope="row" class="hover:underline cursor-pointer" onclick="toggleId(this, '{{ $task->id }}')">
+                {{ Str::limit($task->id, 10, '...') }}
+            </th>
             <td>{{ $task->name }}</td>
             <td>{{ $task->description }}</td>
             <td>{{ \Carbon\Carbon::parse($task->date)->translatedFormat('d \d\e F, Y') }}</td>
             <td>
-                <x-status-indicator status="{{$task -> status}}" class="dropdown-toggle" />
-                <div class="dropdown">
-                    <ul class="dropdown-menu">
-                        @foreach($availableStatus as $status)
-                        <li class="ml-5" class="dropdown-item">
-                            <form action="{{route('task.edit', ['id' => $task->id, 'status' => $status])}}" method="post" id="form-test">
-                                @csrf
-                                @method('PUT')
-                                <button type="submit" id="$status">
-                                    <div class="flex items-center gap-2">
-                                        {{ ucwords(str_replace('-', ' ', $status)) }}
-                                        <div class="h-2 w-2 rounded-full
-                                            @if($status === 'completed') bg-success
-                                            @elseif($status === 'in-progress') bg-warning
-                                            @elseif($status === 'canceled') bg-danger
-                                            @else bg-secondary @endif">
-                                        </div>
-                                    </div>
-                                </button>
-                            </form>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
+                <livewire:status-selector :taskId="$task->id" />
             </td>
             <td class="flex justify-center items-center min-h-[4rem]">
                 <button type="submit" data-bs-toggle="modal" data-bs-target="#{{$task->id}}">

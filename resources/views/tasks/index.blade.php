@@ -40,7 +40,9 @@
     </button>
 
     <div id="table-container" class="overflow-auto p-10">
-        <x-all-tasks-table :tasks="$tasks" />
+        
+        <livewire:tasks-table />
+
     </div>
 
     <a href="/in-progress" class="btn btn-primary self-end">
