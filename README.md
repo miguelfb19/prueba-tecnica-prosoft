@@ -11,13 +11,31 @@ Windows:
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
 ```
 
-2. Correr servidor de desarrollo: `composer run dev`
+3. clonar repositorio: 
+```
+git clone https://github.com/miguelfb19/prueba-tecnica-prosoft.git
+cd prueba-tecnica-prosoft
+```
+4. Instalar dependencias del proyecto: `composer install`
 
-3. En el navegador busca `http://localhost:8000` para ver la app corriendo.
+5. Configurar variables d entorno:
+```
+cp .env.example .env  # Mac/Linux
+copy .env.example .env # Windows
+php artisan key:generate
+```
+6. Crear DDBB SQLITE en caso de que no exista:
+```
+touch database/database.sqlite  # Mac/Linux
+type NUL > database/database.sqlite  # Windows
+```
+7. Ejecutar migración y seeder para la DDBB: `php artisan migrate:fresh --seed`
 
-4. Ejecutar la migración para la DB: `php artisan migrate:fresh`
+En caso de que no funcione el anterior comando ejecutamos primero: `php artisan migrate` y despues `php artisan db:seed` 
 
-5. Ejecutar el seed para llenar la DDBB: `php artisan db:seed` y recargar el navegador para ver los cambios.
+8. Correr servidor de desarrollo: `composer run dev`
+
+9. En el navegador busca `http://localhost:8000` para ver la app corriendo.
 
 # NOTAS DEL DESARROLLO
 
